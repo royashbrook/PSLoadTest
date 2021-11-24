@@ -22,10 +22,10 @@ $sb = {
     "Uri"     = $serverURL
     "Method"  = "POST"
     "Headers" = @{
-      "X-Api-Key" = $authKey
+      "authkeyname" = $authKey
     }
     "Body"    = (@{
-        "name"          = "royashbrook"
+        "name"          = "my name!"
         "date"          = get-date -Format "yyyy-MM-ddTHH:mm:ssK"
         "requests_sent" = $requests_sent
       }) | convertto-json
@@ -35,7 +35,7 @@ $sb = {
   $measure = measure-command {
     try {
       $res = Invoke-RestMethod @params
-      if ("$res" -eq "@{successful=True}") { $res = 1 }
+      if ("$res" -eq "@{expected=response}") { $res = 1 }
       else { $res = 0 }
     } catch {
       $res = 0
